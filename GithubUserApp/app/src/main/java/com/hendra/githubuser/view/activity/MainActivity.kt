@@ -12,10 +12,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.hendra.githubuser.R
 import com.hendra.githubuser.adapter.SearchViewAdapter
+import com.hendra.githubuser.viewmodel.SearchViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var searchViewAdapter: SearchViewAdapter
+    private lateinit var searchViewModel: SearchViewModel
+
+    companion object {
+        val TAG = MainActivity::class.java.simpleName
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
