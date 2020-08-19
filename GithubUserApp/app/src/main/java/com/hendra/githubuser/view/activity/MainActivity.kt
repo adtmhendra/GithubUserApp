@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.hendra.githubuser.R
 import com.hendra.githubuser.adapter.SearchViewAdapter
 import com.hendra.githubuser.viewmodel.SearchViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,7 +66,27 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    
+
     private fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showProgressBar(boolean: Boolean) {
+        if (boolean) progressBar.visibility = View.VISIBLE
+        else progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun showEmptyData(boolean: Boolean) {
+        if (boolean) {
+            imgAddData.visibility = View.VISIBLE
+            tvTitle.visibility = View.VISIBLE
+            tvDescription.visibility = View.VISIBLE
+        } else {
+            imgAddData.visibility = View.INVISIBLE
+            tvTitle.visibility = View.INVISIBLE
+            tvDescription.visibility = View.INVISIBLE
+        }
+
     }
 }

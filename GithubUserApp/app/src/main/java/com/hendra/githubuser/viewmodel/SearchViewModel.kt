@@ -23,6 +23,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         client.enqueue(object : Callback<ResponseUser> {
 
             override fun onResponse(call: Call<ResponseUser>, response: Response<ResponseUser>) {
+                Log.d(MainActivity.TAG, "onResponse: Start...")
                 val dataArray = response.body()?.items as List<ItemsItem?>
                 Log.d(MainActivity.TAG, dataArray.toString())
                 try {
@@ -30,16 +31,18 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                         listUsers.postValue(data)
                     }
                 } catch (e: Exception) {
-                    Log.d(MainActivity.TAG, "Failed...")
+                    Log.d(MainActivity.TAG, "onResponse: Failed...")
+                    e.printStackTrace()
                 }
             }
 
             override fun onFailure(call: Call<ResponseUser>, t: Throwable) {
-                Log.d(MainActivity.TAG, "onFailure: Failed")
+                Log.d(MainActivity.TAG, "onFailure: Failed...")
+                t.printStackTrace()
             }
 
         })
     }
 
-    fun getUser():LiveData<ItemsItem> = listUsers
+    fun getUser(): LiveData<ItemsItem> = listUsers
 }
