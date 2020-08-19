@@ -8,18 +8,22 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hendra.githubuser.R
 import com.hendra.githubuser.adapter.SearchViewAdapter
+import com.hendra.githubuser.model.ItemsItem
 import com.hendra.githubuser.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var searchViewAdapter: SearchViewAdapter
+    private lateinit var adapter: SearchViewAdapter
     private lateinit var searchViewModel: SearchViewModel
+    private val listUsers = ArrayList<ItemsItem>()
 
     companion object {
         val TAG = MainActivity::class.java.simpleName
@@ -28,6 +32,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        adapter = SearchViewAdapter(listUsers)
+        rvSearchView.layoutManager = LinearLayoutManager(this)
+        rvSearchView.adapter = adapter
+
+        searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
+        getItems()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -55,7 +66,9 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             // when search icon is pressed
             override fun onQueryTextSubmit(query: String): Boolean {
-                showToast(this@MainActivity, query)
+                showProgressBar(true)
+                searchViewModel.setUser(query)
+                showEmptyData(false)
                 return true
             }
 
@@ -66,10 +79,13 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    
-
-    private fun showToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    private fun getItems() {
+        searchViewModel.getUser().observe(this, Observer {
+            if (it != null) {
+                listUsers.addAll(it)
+                showProgressBar(false)
+            }
+        })
     }
 
     private fun showProgressBar(boolean: Boolean) {
