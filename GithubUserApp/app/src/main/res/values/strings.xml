@@ -1,4 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Github User</string>
-    <string name="splash_screen_picture">Splash screen picture</string>
+    <string name="could_not_find_result">Could not find anything</string>
+    <string name="use_search_feature">Please use search feature to find the data you were looking for</string>
+    <string name="change_language">Change language</string>
+    <string name="search">Search</string>
+    <string name="about">About</string>
+    <string name="empty_image_picture">Empty image picture</string>
+    <string name="splash_screen_picture">Splash screen  picture</string>
+    <string name="name">Name</string>
+    <string name="company">Company</string>
+    <string name="github_link">Github Link</string>
+    <string name="you_choose">You choose :</string>
 </resources>

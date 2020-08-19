@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Github User</string>
-    <string name="splash_screen_picture">Gambar splash screen</string>
+    <string name="could_not_find_result">Hasil tidak ditemukan</string>
+    <string name="use_search_feature">Gunakan fitur pencarian untuk menemukan data yang ingin kamu cari, ya!</string>
+    <string name="change_language">Ubah bahasa</string>
+    <string name="search">Cari</string>
+    <string name="about">Tentang</string>
+    <string name="empty_image_picture">Gambar data kosong</string>
+    <string name="splash_screen_picture">Splash screen picture</string>
+    <string name="name">Nama</string>
+    <string name="company">Perusahaan</string>
+    <string name="github_link">Link Github</string>
+    <string name="you_choose">Kamu memilih : </string>
 </resources>
