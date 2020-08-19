@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hendra.githubuser.R
 import com.hendra.githubuser.model.ItemsItem
 import kotlinx.android.synthetic.main.users_row.view.*
@@ -27,6 +28,7 @@ class SearchViewAdapter(private val itemsItem: ArrayList<ItemsItem>) : RecyclerV
     inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(itemsItem: ItemsItem) {
             with(itemView) {
+                Glide.with(itemView).load(itemsItem.avatarUrl).into(imgProfile)
                 tvUsername.text = itemsItem.login
                 tvGithubLink.text = itemsItem.url
             }
