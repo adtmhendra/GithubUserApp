@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun getItems() {
         searchViewModel.getUser().observe(this, Observer {
             if (it != null) {
+                showEmptyData(false)
                 listUsers.addAll(it)
                 showProgressBar(false)
             }
