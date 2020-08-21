@@ -12,4 +12,7 @@
     <string name="company">Company</string>
     <string name="github_link">Github Link</string>
     <string name="you_choose">You choose :</string>
+    <string name="_404_not_found_picture">404 not found picture</string>
+    <string name="no_results_found">No results found</string>
+    <string name="make_sure_the_words">Please make sure that the words you searched were correct</string>
 </resources>

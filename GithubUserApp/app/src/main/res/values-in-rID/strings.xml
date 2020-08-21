@@ -11,4 +11,7 @@
     <string name="company">Perusahaan</string>
     <string name="github_link">Link Github</string>
     <string name="you_choose">Kamu memilih : </string>
+    <string name="_404_not_found_picture">Gambar 404 not found</string>
+    <string name="no_results_found">No results found</string>
+    <string name="make_sure_the_words">Pastikan Anda memasukkan kata yang benar untuk melakukan pencarian</string>
 </resources>
