@@ -47,7 +47,5 @@ class SearchViewModel() : ViewModel() {
         })
     }
 
-    fun getUser(): LiveData<ArrayList<ItemsItem>> {
-        return listUsers
-    }
+    fun getUser(): LiveData<ArrayList<ItemsItem>> = listUsers
 }

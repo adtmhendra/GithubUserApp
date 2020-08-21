@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         rvSearchView.layoutManager = LinearLayoutManager(this)
         rvSearchView.adapter = adapter
 
-        searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
+        bindWithViewModel()
         getItems()
     }
 
@@ -79,6 +79,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun bindWithViewModel() {
+        searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
+    }
+
     private fun getItems() {
         searchViewModel.getUser().observe(this, Observer {
             if (it != null) {
@@ -104,6 +108,5 @@ class MainActivity : AppCompatActivity() {
             tvTitle.visibility = View.INVISIBLE
             tvDescription.visibility = View.INVISIBLE
         }
-
     }
 }
