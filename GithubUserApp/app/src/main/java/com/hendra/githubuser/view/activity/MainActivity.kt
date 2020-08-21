@@ -34,12 +34,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        showRecyclerList()
+        bindWithViewModel()
+        getItems()
+    }
+
+    private fun showRecyclerList() {
         adapter = SearchViewAdapter(listUsers)
         rvSearchView.layoutManager = LinearLayoutManager(this)
         rvSearchView.adapter = adapter
-
-        bindWithViewModel()
-        getItems()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 showProgressBar(true)
                 showEmptyData(false)
                 searchViewModel.setUser(query)
-                return true
+                return false
             }
 
             // when text changed
