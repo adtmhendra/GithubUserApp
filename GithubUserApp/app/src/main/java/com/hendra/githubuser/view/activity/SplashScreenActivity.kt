@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.hendra.githubuser.R
 import kotlinx.android.synthetic.main.activity_splash_screen.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun moveToMainActivity() {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             delay(3000)
             startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
             finish()

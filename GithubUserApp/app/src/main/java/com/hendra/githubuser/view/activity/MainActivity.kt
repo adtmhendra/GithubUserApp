@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -43,8 +44,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
-        searchView(menu)
-        return super.onCreateOptionsMenu(menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchableInfo = searchManager.getSearchableInfo(componentName)
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+
+        searchView.setSearchableInfo(searchableInfo)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            // when search icon is pressed
+            override fun onQueryTextSubmit(query: String): Boolean {
+                showProgressBar(true)
+                showEmptyData(false)
+                searchViewModel.setUser(query)
+                return true
+            }
+
+            // when text changed
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -54,29 +74,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             return true
         }
-    }
-
-    private fun searchView(menu: Menu) {
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchableInfo = searchManager.getSearchableInfo(componentName)
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
-
-        searchView.setSearchableInfo(searchableInfo)
-        searchView.queryHint = resources.getString(R.string.search)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            // when search icon is pressed
-            override fun onQueryTextSubmit(query: String): Boolean {
-                showProgressBar(true)
-                searchViewModel.setUser(query)
-                showEmptyData(false)
-                return true
-            }
-
-            // when text changed
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
     }
 
     private fun bindWithViewModel() {
@@ -89,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                 showEmptyData(false)
                 listUsers.addAll(it)
                 showProgressBar(false)
-            }
+            } else showEmptyData(true)
         })
     }
 
@@ -100,13 +97,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun showEmptyData(boolean: Boolean) {
         if (boolean) {
-            imgAddData.visibility = View.VISIBLE
+            searchData.visibility = View.VISIBLE
             tvTitle.visibility = View.VISIBLE
             tvDescription.visibility = View.VISIBLE
         } else {
-            imgAddData.visibility = View.INVISIBLE
+            searchData.visibility = View.INVISIBLE
             tvTitle.visibility = View.INVISIBLE
             tvDescription.visibility = View.INVISIBLE
         }
+    }
+
+    private fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
