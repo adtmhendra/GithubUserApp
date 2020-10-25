@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SearchViewModel() : ViewModel() {
+class SearchViewModel : ViewModel() {
 
     val listUsers = MutableLiveData<ArrayList<ItemsItem>>()
 
